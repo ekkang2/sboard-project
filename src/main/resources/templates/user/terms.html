@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>약관</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <script>
+        window.onload = function(){
+
+            const btnNext = document.getElementsByClassName('btnNext')[0];
+
+
+            btnNext.onclick = function(e){
+                e.preventDefault(); // 기본 링크 이동을 막습니다.
+
+                const chk1 = document.getElementById('chk1');
+                const chk2 = document.getElementById('chk2');
+
+                const chk1_1 = chk1.checked;
+                const chk2_1 = chk2.checked;
+
+                if(chk1_1 && chk2_1){
+                    window.location.href = "/sboard/user/register";
+                    console.log("changed!!!");
+                }else{
+                    alert('약관에 동의해주세요');
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+            <h3>Board System</h3>
+        </header>
+        <main id="user">
+            <section class="terms">
+                <h2 class="tit">사이트 이용약관</h2>
+                <table border="1">                    
+                    <tr>
+                        <td>
+                            <textarea name="terms">[[${termsDTO.terms}]]</textarea>
+                            <label><input type="checkbox" id="chk1" class="terms">&nbsp;동의합니다.</label>
+                        </td>
+                    </tr>
+                </table>
+
+                <h2 class="tit">개인정보 취급방침</h2>
+                <table border="1">                    
+                    <tr>
+                        <td>
+                            <textarea name="privacy">[[${termsDTO.privacy}]]</textarea>
+                            <label><input type="checkbox" id="chk2" class="privacy">&nbsp;동의합니다.</label>
+                        </td>
+                    </tr>
+                </table>
+                
+                <div>
+                    <a th:href="@{/user/login}" class="btn btnCancel">취소</a>
+                    <a th:href="@{/user/register}" class="btn btnNext">다음</a>
+                </div>
+
+            </section>
+        </main>
+        <footer>
+            <p>
+                <span class="copyright">Copyrightⓒ 김철학(개발에반하다.)</span>
+                <span class="version">v1.0.1</span>
+            </p>
+        </footer>
+    </div>    
+</body>
+</html>
