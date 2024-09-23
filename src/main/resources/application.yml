@@ -13,14 +13,16 @@ logging:
                         bind: trace
                 sql: debug
         root: info
+
 server:
     port: 8082
     servlet:
         context-path: /sboard
+
 spring:
     application:
         name: sboard
-        version: 0.0.2
+        version: 0.0.3
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://43.203.249.80:3306/jboard
@@ -56,3 +58,8 @@ spring:
 
     thymeleaf:
         prefix: classpath:/templates
+
+    servlet:
+      multipart:
+          location: uploads/
+          max-file-size: 10MB

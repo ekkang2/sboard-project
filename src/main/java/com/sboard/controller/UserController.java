@@ -23,15 +23,10 @@ import java.util.Map;
 @Controller
 public class UserController {
 
-
     private final UserService userService;
-
-    private final AppInfo appInfo;
-
 
     @GetMapping("/user/login")
     public String login(Model model) {
-        model.addAttribute(appInfo);
         return "/user/login";
     }
 
