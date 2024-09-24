@@ -3,6 +3,8 @@ package com.sboard.controller;
 import com.sboard.config.AppInfo;
 import com.sboard.dto.ArticleDTO;
 import com.sboard.dto.FileDTO;
+import com.sboard.dto.PageRequestDTO;
+import com.sboard.dto.PageResponseDTO;
 import com.sboard.service.ArticleService;
 import com.sboard.service.FileService;
 import com.sboard.service.UserService;
@@ -25,7 +27,11 @@ public class ArticleController {
     private final FileService fileService;
 
     @GetMapping("/article/list")
-    public String list(Model model) {
+    public String list(Model model, PageRequestDTO pageRequestDTO) {
+
+        PageResponseDTO pageResponseDTO = articleService.selectArticleAll(pageRequestDTO);
+        model.addAttribute(pageResponseDTO);
+
         return "/article/list";
     }
 
@@ -53,8 +59,6 @@ public class ArticleController {
             fileDTO.setAno(ano);
             fileService.insertFile(fileDTO);
         }
-
-
 
         return "redirect:/article/list";
     }
