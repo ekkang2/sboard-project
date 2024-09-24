@@ -32,6 +32,7 @@ public class ArticleController {
         PageResponseDTO pageResponseDTO = articleService.selectArticleAll(pageRequestDTO);
         model.addAttribute(pageResponseDTO);
 
+
         return "/article/list";
     }
 
