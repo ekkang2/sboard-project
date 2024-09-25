@@ -14,7 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -38,6 +40,19 @@ public class ArticleService {
     }
 
     public ArticleDTO selectArticle(int no){
+
+        // 엔티티를 Optional로 포장해놓은 거라고 생각
+        Optional<Article> optArticle = articleRepository.findById(no);
+
+        if(optArticle.isPresent()){
+            Article article = optArticle.get();
+            log.info(article);
+
+
+            ArticleDTO dto = modelMapper.map(article, ArticleDTO.class);
+            return dto;
+        }
+
         return null;
     }
 

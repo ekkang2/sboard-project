@@ -12,12 +12,15 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Log4j2
@@ -27,6 +30,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final TermsRepository termsRepository;
+    private final ModelMapper modelMapper;
 
     // JavaMailSender 주입
     private final JavaMailSender javaMailSender;
@@ -38,12 +42,21 @@ public class UserService {
 
         String encoded = passwordEncoder.encode(userDTO.getPass());
         userDTO.setPass(encoded);
+
+        log.info(userDTO.toString());
         userRepository.save(userDTO.toEntity());
     }
 
-    public void selectUser(){
+    public UserDTO selectUser(String username){
+        Optional<User> opt = userRepository.findById(username);
+        if(opt.isPresent()){
+            User user = opt.get();
+            return modelMapper.map(user, UserDTO.class);
+        }
+        return null;
 
     }
+
     public void selectAllUser(){
 
     }

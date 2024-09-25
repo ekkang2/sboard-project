@@ -39,6 +39,12 @@ public class ArticleDTO {
     // 추가 필드
     private String nick;
 
+    // 파일 리스트
+    private List<FileDTO> fileList;
+
+    // 댓글 리스트 (entity랑 dto 맞춰야함)
+    private List<CommentDTO> commentList;
+
     /*
     Entity 변환 메서드 대신 ModelMapper 사용
      */

@@ -53,8 +53,9 @@ public class UserController {
 
         log.info(userDTO.toString());
 
-        userService.insertUser(userDTO);
 
+        userService.insertUser(userDTO);
+        log.info("insert 성공!");
         return "redirect:/user/login?success=200";
     }
 
