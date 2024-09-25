@@ -25,7 +25,7 @@ class ArticleServiceTest {
 
         Page<Tuple> pageArticle = articleRepository.selectArticleAllForList(pageRequestDTO, pageable);
 
-        System.out.println("pageArticle : " + pageArticle.getContent());
+       // System.out.println("pageArticle : " + pageArticle.getContent());
 
     }
 }
